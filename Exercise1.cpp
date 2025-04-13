@@ -1,22 +1,28 @@
 #include <iostream>
+#include <string> // for using string
 using namespace std;
 
 int main() {
-    int myNumber = 42; // just a random number to store
+    // Dynamically creating an int and a string
+    int* myInt = new int;           // this creates an int on the heap
+    string* myStr = new string;     // this creates a string on the heap
 
-    int* ptr = &myNumber; // pointer that stores address of myNumber
+    // Ask user for input
+    cout << "Enter an integer: ";
+    cin >> *myInt; // using the pointer to store value directly
 
-    // Output the value of the variable directly
-    cout << "Value of myNumber: " << myNumber << endl;
+    cin.ignore(); // clears out leftover newline from previous input
 
-    // Output the address of the variable
-    cout << "Address of myNumber: " << &myNumber << endl;
+    cout << "Enter a word: ";
+    getline(cin, *myStr); // storing user input in the string pointer
 
-    // Output the value stored in the pointer (should match address above)
-    cout << "Value of ptr (should be address): " << ptr << endl;
+    // Show the values back to the user
+    cout << "\nYou entered the integer: " << *myInt << endl;
+    cout << "You entered the string: " << *myStr << endl;
 
-    // Output the value pointed to by the pointer (dereferencing it)
-    cout << "Value pointed to by ptr: " << *ptr << endl;
+    // Free the memory since we used new
+    delete myInt;
+    delete myStr;
 
     return 0;
 }
