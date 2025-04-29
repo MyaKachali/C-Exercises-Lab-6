@@ -3,51 +3,46 @@ using namespace std;
 
 int main() {
     int rows, cols;
-
-    // Ask for dimensions (limit them to 3)
-    cout << "Enter number of rows (max 3): ";
-    cin >> rows;
-    while (rows > 3 || rows < 1) {
-        cout << "Invalid! Enter rows between 1 and 3: ";
+    
+    // Get valid dimensions (max 3)
+    do {
+        cout << "Enter number of rows (1-3): ";
         cin >> rows;
-    }
+    } while(rows < 1 || rows > 3);
 
-    cout << "Enter number of columns (max 3): ";
-    cin >> cols;
-    while (cols > 3 || cols < 1) {
-        cout << "Invalid! Enter columns between 1 and 3: ";
+    do {
+        cout << "Enter number of columns (1-3): ";
         cin >> cols;
+    } while(cols < 1 || cols > 3);
+
+    // Allocate 2D array
+    double** array = new double*[rows];
+    for(int i = 0; i < rows; i++) {
+        array[i] = new double[cols];
     }
 
-    // Dynamically create a 2D array of doubles
-    double** array = new double*[rows]; // create an array of row pointers
-    for (int i = 0; i < rows; ++i) {
-        array[i] = new double[cols]; // for each row, create a column array
-    }
-
-    // Get user input to fill the array
-    cout << "\nEnter values for the array:\n";
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
-            cout << "Value for [" << i << "][" << j << "]: ";
-            cin >> array[i][j]; // assigning values with regular indexing
+    // Fill array
+    for(int i = 0; i < rows; i++) {
+        for(int j = 0; j < cols; j++) {
+            cout << "Enter value for [" << i << "][" << j << "]: ";
+            cin >> array[i][j];
         }
     }
 
-    // Display the array
-    cout << "\nArray values:\n";
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
-            cout << array[i][j] << " ";
+    // Display array
+    cout << "\nArray contents:\n";
+    for(int i = 0; i < rows; i++) {
+        for(int j = 0; j < cols; j++) {
+            cout << array[i][j] << "\t";
         }
         cout << endl;
     }
 
-    // Free the memory (important when using new)
-    for (int i = 0; i < rows; ++i) {
-        delete[] array[i]; // delete each row array
+    // Free memory
+    for(int i = 0; i < rows; i++) {
+        delete[] array[i];
     }
-    delete[] array; // delete the array of pointers
+    delete[] array;
 
     return 0;
 }
