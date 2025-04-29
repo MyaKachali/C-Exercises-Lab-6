@@ -1,28 +1,30 @@
 #include <iostream>
-#include <string> // for using string
+#include <string>
 using namespace std;
 
 int main() {
-    // Dynamically creating an int and a string
-    int* myInt = new int;           // this creates an int on the heap
-    string* myStr = new string;     // this creates a string on the heap
+    // Dynamically allocate an integer
+    int* dynamicInt = new int;
+    
+    // Dynamically allocate a string
+    string* dynamicString = new string;
 
-    // Ask user for input
-    cout << "Enter an integer: ";
-    cin >> *myInt; // using the pointer to store value directly
+    // Get integer input
+    cout << "Enter an integer value: ";
+    cin >> *dynamicInt;
 
-    cin.ignore(); // clears out leftover newline from previous input
+    // Get string input
+    cout << "Enter a string value: ";
+    cin.ignore(); // Clear input buffer
+    getline(cin, *dynamicString);
 
-    cout << "Enter a word: ";
-    getline(cin, *myStr); // storing user input in the string pointer
+    // Display results
+    cout << "\nInteger value: " << *dynamicInt << endl;
+    cout << "String value: " << *dynamicString << endl;
 
-    // Show the values back to the user
-    cout << "\nYou entered the integer: " << *myInt << endl;
-    cout << "You entered the string: " << *myStr << endl;
-
-    // Free the memory since we used new
-    delete myInt;
-    delete myStr;
+    // Free memory
+    delete dynamicInt;
+    delete dynamicString;
 
     return 0;
 }
